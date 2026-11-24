@@ -15,6 +15,7 @@ const hind = Hind_Siliguri({
 export const metadata: Metadata = {
   title: "বাজার দর — প্রয়োজনীয় পণ্যের দাম এক নজরে",
   description: "চাল, ডাল, তেল, মাছ, মাংসসহ নিত্যপ্রয়োজনীয় পণ্যের সর্বশেষ বাজারদর।",
+  icons: { icon: "/logo-icon.png", apple: "/logo-icon.png" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

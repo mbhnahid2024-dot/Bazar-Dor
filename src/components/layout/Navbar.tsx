@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, LogOut, User } from "lucide-react";
@@ -34,18 +35,25 @@ export default function Navbar() {
   }
 
   return (
-    <header className="border-b border-line bg-card">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
-        <Link href="/" className="flex items-center gap-3">
-          <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand text-lg">🛒</span>
-          <span className="leading-tight">
-            <span className="block text-lg font-bold">বাজার দর</span>
-            <BanglaDate className="block text-xs text-stone-600" />
+    <header className="sticky top-0 z-40 border-b border-line bg-card">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-3 py-2.5 sm:px-4 sm:py-3">
+        <Link href="/" className="flex min-w-0 items-center gap-2 sm:gap-3">
+          <Image
+            src="/logo-icon.png"
+            alt="বাজার দর"
+            width={40}
+            height={40}
+            priority
+            className="h-9 w-9 shrink-0 rounded-xl object-cover sm:h-10 sm:w-10"
+          />
+          <span className="min-w-0 leading-tight">
+            <span className="block text-base font-bold sm:text-lg">বাজার দর</span>
+            <BanglaDate className="block truncate text-[11px] text-stone-600 sm:text-xs" />
           </span>
         </Link>
 
         {isPending ? (
-          <div className="h-9 w-28 animate-pulse rounded-lg bg-stone-200" />
+          <div className="h-9 w-24 animate-pulse rounded-lg bg-stone-200" />
         ) : user ? (
           <div className="relative" ref={ref}>
             <button
@@ -61,11 +69,11 @@ export default function Navbar() {
                   {user.name.charAt(0)}
                 </span>
               )}
-              <span className="text-sm font-medium">{user.name.split(" ")[0]}</span>
+              <span className="hidden text-sm font-medium sm:inline">{user.name.split(" ")[0]}</span>
               <ChevronDown className="h-3.5 w-3.5 text-stone-500" />
             </button>
             {open && (
-              <div className="absolute right-0 top-12 z-50 w-64 rounded-2xl border border-line bg-white p-4 shadow-lg">
+              <div className="absolute right-0 top-12 z-50 w-64 max-w-[calc(100vw-1.5rem)] rounded-2xl border border-line bg-white p-4 shadow-lg">
                 <p className="font-semibold">{user.name}</p>
                 <p className="truncate text-sm text-stone-500">{user.email}</p>
                 <Link href="/profile" className="mt-4 flex items-center gap-2 text-sm hover:text-brand">
@@ -78,13 +86,13 @@ export default function Navbar() {
             )}
           </div>
         ) : (
-          <div className="flex items-center gap-2">
-            <Link href="/sign-in" className="rounded-lg px-4 py-2 text-sm font-medium hover:bg-stone-100">
+          <div className="flex shrink-0 items-center gap-1 sm:gap-2">
+            <Link href="/sign-in" className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-stone-100 sm:px-4">
               সাইন ইন
             </Link>
             <Link
               href="/sign-up"
-              className="rounded-lg bg-brand px-4 py-2 text-sm font-medium text-white shadow-md shadow-green-900/20 hover:bg-brand-dark"
+              className="rounded-lg bg-brand px-3 py-2 text-sm font-medium text-white shadow-md shadow-green-900/20 hover:bg-brand-dark sm:px-4"
             >
               সাইন আপ
             </Link>
@@ -94,7 +102,7 @@ export default function Navbar() {
 
       <nav
         aria-label="ক্যাটাগরি"
-        className="mx-auto flex max-w-6xl gap-1 overflow-x-auto border-t border-line px-4 py-2"
+        className="mx-auto flex max-w-6xl gap-1 overflow-x-auto border-t border-line px-3 py-2 sm:px-4"
       >
         {CATEGORIES.map((c) => {
           const active = pathname === `/category/${c.slug}`;
